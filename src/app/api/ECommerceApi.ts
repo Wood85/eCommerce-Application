@@ -34,8 +34,7 @@ class ECommerceApi {
   static async getAnonymousToken(clientDetails: IAPIClientDetails): Promise<ITokenPassword> {
     const uniqueId = self.crypto.randomUUID();
     const basicAuthData = btoa(`${clientDetails.clientId}:${clientDetails.secret}`);
-    const scope =
-      'view_orders:tea-team-app view_products:tea-team-app manage_my_orders:tea-team-app manage_my_profile:tea-team-app';
+    const { scope } = clientDetails;
     const response = await fetch(`${clientDetails.AuthURL}/oauth/${clientDetails.projectKey}/anonymous/token`, {
       method: 'POST',
       headers: {
